@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  job-postgres-database:
+    container_name: job-postgres-database
+    image: postgres:14
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=jobs
+    volumes:
+      - /home/daniel/Dokumenty/coding/volumes/postgres/jobs:/var/lib/postgresql/data
+

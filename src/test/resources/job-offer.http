@@ -1,0 +1,31 @@
+###
+GET http://localhost:8080/api/v1/job-offers
+
+<> 2022-03-29T185916.200.json
+
+###
+GET http://localhost:8080/api/v1/job-offers?size=2&page=2
+
+<> 2022-03-29T185944.200.json
+
+###
+POST http://localhost:8080/api/v1/job-offers
+Content-Type: application/json
+
+{
+  "category": {
+    "id": 2,
+    "name": "IT"
+  },
+  "employer": {
+    "firstName": "Karolina",
+    "lastName": "Biała",
+    "login": "karo",
+    "password": "pas123",
+    "id": 5,
+    "accountCreationDate": "2012-12-28T21:36:16"
+  },
+  "startDate": "2022-01-01"
+}
+
+<> 2022-03-29T190303.200.json

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="job-offers-import-ct" author="dbiniek">
+        <createTable tableName="import_job_offers">
+            <column name="category" type="varchar"/>
+            <column name="start_date" type="varchar"/>
+            <column name="end_date" type="varchar"/>
+            <column name="name_of_employer" type="varchar"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="job-offers-import-ld" author="dbiniek">
+        <loadData tableName="import_job_offers" file="db/init/data/csv/job-offers.csv"/>
+    </changeSet>
+
+    <changeSet id="job-offers-import-id" author="dbiniek">
+        <sql>insert into job_offers(category_id, start_date, end_date, employer_id)
+             select cat.id, cast(ijd.start_date as date), cast(ijd.end_date as date), us.id
+             from import_job_offers ijd
+                    join categories cat on cat.name = ijd.category
+                    join users us on us.login = ijd.name_of_employer;
+        </sql>
+    </changeSet>
+
+    <changeSet id="job-offers-import-dt" author="dbiniek">
+        <dropTable tableName="import_job_offers"/>
+    </changeSet>
+
+</databaseChangeLog>

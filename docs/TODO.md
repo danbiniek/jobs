@@ -1,0 +1,5 @@
+- more tests of user service
+- more tests of job offer service
+- extreact api, domain and rest packages to external, independent module
+- integration tests
+- better error handling, especially NPE from DTOs

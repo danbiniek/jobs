@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="job_offers-table" author="dbiniek">
+        <createTable tableName="job_offers">
+            <column name="id" type="integer" autoIncrement="true"/>
+            <column name="category_id" type="int"/>
+            <column name="start_date" type="date"/>
+            <column name="end_date" type="date"/>
+            <column name="employer_id" type="int"/>
+        </createTable>
+
+        <addPrimaryKey tableName="job_offers" columnNames="id"/>
+        <addForeignKeyConstraint baseTableName="job_offers" baseColumnNames="category_id"
+                                 constraintName="job_offers_category_fk"
+                                 referencedTableName="categories" referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="job_offers" baseColumnNames="employer_id"
+                                 constraintName="job_offers_employer_fk"
+                                 referencedTableName="users" referencedColumnNames="id"/>
+        <addNotNullConstraint tableName="job_offers" columnName="category_id"/>
+        <addNotNullConstraint tableName="job_offers" columnName="start_date"/>
+        <addNotNullConstraint tableName="job_offers" columnName="end_date"/>
+        <addNotNullConstraint tableName="job_offers" columnName="employer_id"/>
+    </changeSet>
+
+</databaseChangeLog>
